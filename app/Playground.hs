@@ -10,4 +10,6 @@ float = 3.2 :: Float
 toInt :: Float -> Int
 toInt = round
 
-main = print (toInt 12.3) :: IO ()
+main = 
+    show (toInt 12.3)
+    
