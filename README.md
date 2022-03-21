@@ -122,7 +122,7 @@ product [3,4,5,3] --> 180
 ['K'..'Z'] --> "KLMNOPQRSTUVWXYZ"
 ```
 
-### Predicates
+### List comprehension (predicates)
 ```haskell
 -- excludes every number from the given list which doesnt match the modulus comparison the number 1 is specifically excluded. The if now only evaluates the newly create list
 predicates xs = [ if x < 10 then "< 10" else "> 10!" |x <- xs, x `mod` 3 == 1, x /= 1]
