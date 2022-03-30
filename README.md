@@ -96,10 +96,10 @@ False
 
 ### List
 ```haskell
-head [3,4,5,3] --> 5
-tail [3,4,5,3] --> [4,5,3]
-last [3,4,5,3] --> 3
-init [3,4,5,3] --> [3,4,5]
+head [5,4,5,3] --> 5
+tail [5,4,5,3] --> [4,5,3]
+last [5,4,5,3] --> 3
+init [5,4,5,3] --> [5,4,5]
 
 length "Hello" --> 5
 null [] --> True
@@ -146,6 +146,82 @@ toInt :: Float -> Int
 toInt = round
 ```
 
+#### Syntax
+
+#### Other stuff
+If you want to add a char to a string you need to put the char inside an array!
+```haskell
+"Hell" ++ ['o']
+"Hell" ++ "o"
+```
+
+##### Pattern matching
+
+```haskell
+num :: (Integral a) => a -> String
+num 7 = "This is seven"
+num 6 = "This is six"
+num 5 = "This is five"
+num x = "Anything but 7, 6 or 5"
+
+factorial :: (Integral a) => a -> a  
+factorial 0 = 1  
+factorial n = n * factorial (n - 1)  
+
+f' :: (a,b,c) -> a
+f' (x, _, _) = x
+
+s' :: (a,b,c) -> b
+s' (_, y, _) = y
+
+t' :: (a, b, c) -> c  
+t' (_, _, z) = z
+
+add3DVector :: (Num a) => (a,a,a) -> (a,a,a) -> (a,a,a)
+add3DVector v1 v2 = (f' v1 + f' v2, s' v1 + s' v2,t' v1 + t' v2)
+
+capital :: String -> String  
+capital "" = "Empty string, whoops!"  
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+-- all@() is an alias for the complete array
+
+--Guards
+bmiTell :: (RealFloat a) => a -> String  
+bmiTell bmi  
+    | bmi <= 18.5 = "You're underweight!"   
+    | otherwise   = "You're heavy!" 
+
+bmiTell :: (RealFloat a) => a -> a -> String  
+bmiTell weight height  
+    | weight / height ^ 2 <= 18.5 = "You're underweight!"  
+
+isOdd :: (Integral a) => a -> [Char]
+isOdd a
+    | num == odd = "True"
+    | num == even = "False!"
+    | otherwise = "somethings wrong!" -- does not make much sense -> only for syntax structure
+    where num = a `mod` 2
+          (odd, even) = (1, 0)
+
+initials :: String -> String -> String  
+initials firstname lastname = [x] ++ ". " ++ [y] ++ "."  
+    where (x:_) = firstname  
+          (y:_) = lastname
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]  
+calcBmis xs = [bmiCalc w h | (w, h) <- xs]  
+    where bmiCalc weight height = weight / height ^ 2
+
+--let <bindings> in <expression>
+cylinder :: (RealFloat a) => a -> a -> a  
+cylinder r h = 
+    let sideArea = 2 * pi * r * h  
+        topArea = pi * r ^2  
+    in  sideArea + 2 * topArea
+
+
+```
+
 #### read
 ```haskell
 -- The read function takes a string and returns a type which is a member of Read
@@ -179,7 +255,7 @@ getElementByIndex =
 #### fromIntegral
 
 ```haskell
-main = print (fromIntegral (12 :: Int) + (3.2 :: Float)) :: IO ()
+print (fromIntegral (12 :: Int) + (3.2 :: Float))
 ```
 
 ```haskell
